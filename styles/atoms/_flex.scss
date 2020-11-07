@@ -1,0 +1,48 @@
+
+$flex-direction-props: 'row', 'col';
+$flex-justify-content-props: 'start', 'center', 'end', 'around', 'between';
+$flex-align-items-props: 'start', 'center', 'end', 'stretch';
+
+@each $dir in $flex-direction-props {
+  @each $jc in $flex-justify-content-props {
+    @each $ai in $flex-align-items-props {
+      .#{$dir}-#{$jc}-#{$ai} {
+        @if $dir == 'row' {
+          @include row;
+        } @else {
+          @include col;
+        }
+
+        @if $jc == 'start' {
+          @include jc-start;
+        } @else if $jc == 'center' {
+          @include jc-center;
+        } @else if $jc == 'end' {
+          @include jc-end;
+        } @else if $jc == 'around' {
+          @include jc-around;
+        } @else {
+          @include jc-between;
+        }
+
+        @if $ai == 'start' {
+          @include ai-start;
+        } @else if $ai == 'center' {
+          @include ai-center;
+        } @else if $ai == 'end' {
+          @include ai-end;
+        } @else {
+          @include ai-stretch;
+        }
+      }
+    }
+  }
+}
+
+$flex-grow-values: 1, 3;
+
+@each $grow in $flex-grow-values {
+  .grow-#{$grow} {
+    flex-grow: $grow;
+  }
+}

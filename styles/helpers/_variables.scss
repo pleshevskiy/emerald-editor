@@ -1,0 +1,93 @@
+// Font Settings
+$site-font:                   'Montserrat', Helvetica, Arial, sans-serif;
+$site-font-size:              14px;
+$site-line-height:            1.2;
+$font-nautilus:               'nautilus';
+
+// Default Color's
+$color-default-black:         #000000;
+$color-default-white:         #FFFFFF;
+
+// Main Color Scheme
+$main-bg-color:               #FDFBF2;
+$primary-site-color:          #149ECC;
+$primary-site-hover:          #14CC14;
+$secondary-site-color:        #F99F18;
+$secondary-site-hover:        #2DBCEB;
+$vitamin-primary-color:       #F0F8FB;
+$vitamin-secondary-color:     #F7F9FC;
+$nutritional-primary-color:   #F0FBF1;
+$nutritional-secondary-color: #F7FCF8;
+$border-color:                #B5B5B5;
+
+// Neutral Color Scheme
+$neutral-primary:             #303133; // Replace and Delete after
+$neutral-regular:             #606266; // Replace and Delete after
+$neutral-placeholder:         #F2F2F2;
+
+// Default Site Color Scheme
+$color-body:                  #767676;
+$color-link:                  #444CE0;
+$color-success:               $primary-site-hover;
+$color-danger-error:          #FD3334;
+$color-warning:               #FED330;
+
+// Mixins Main Variables
+$start-0:                     0;
+$start-1:                     1;
+
+$end-5:                       5;
+$end-10:                      10;
+$end-12:                      12;
+
+$step-0x25:                   0.25;
+$step-1:                      1;
+
+// Grid
+$page-max-width:              1240;
+$page-min-width:              320;
+$page-gutter:                 30;
+$page-gutter-sub:             15;
+
+$column:                      12;
+$gutter:                      20;
+
+$grid:                        7;
+
+$col-offsets:                 ($gutter / 2) * 1px;
+$row-offsets:                 ($col-offsets * -1);
+
+// Media Queries
+$breakpoints: (
+    ('d-1920',  1920px),  // desktop
+    ('d-1660',  1660px),  // desktop
+    ('d-1440',  1440px),  // desktop
+    ('d-1360',  1360px),  // desktop
+    ('d-1280',  1280px),  // desktop
+    ('t-1024',  1024px),  // tablet
+    ('t-960',   960px),   // tablet
+    ('t-860',   860px),   // tablet
+    ('t-768',   768px),   // tablet
+    ('m-640',   640px),   // mobile
+    ('m-540',   540px),   // mobile
+    ('m-480',   480px),   // mobile
+    ('m-425',   425px),   // mobile
+    ('m-375',   375px),   // mobile
+);
+
+// Border radius
+$radius-std:                  4px;
+$radius-std-sub:              10px;
+
+// Font Weight
+$weight-light:                300; // 300 Light
+$weight-regular:              400; // 400 Normal = Regular
+$weight-bold:                 700; // 700 Bold
+
+// Z-index
+$z-index-background:          -100;
+$z-index-backward:            -1;
+$z-index-select:              50;
+$z-index-tooltip:             75;
+$z-index-high:                100;
+$z-index-overlay:             500;

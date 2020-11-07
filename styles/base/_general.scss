@@ -1,0 +1,13 @@
+// General
+// =================================================
+#root {
+  @extend .col-start-stretch;
+  @extend .min-h-100vh;
+}
+
+// Animation
+.animated,
+.animated::before,
+.animated::after {
+  transition: all .2s ease-in-out;
+}

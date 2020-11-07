@@ -1,0 +1,22 @@
+$size-map: (
+    'width': (100vw, 100%),
+    'height': (100vh, 100%),
+);
+
+@each $size-name, $size-values in $size-map {
+    $size-short-name: str-slice($size-name, 1, 1);
+
+    @each $size-value in $size-values {
+        $size-value-name: name-from-value($size-value);
+
+        @if not ends-with($size-value-name, 'v#{$size-short-name}') {
+            .#{$size-short-name}-#{$size-value-name} {
+                #{$size-name}: $size-value;
+            }
+        }
+
+        .min-#{$size-short-name}-#{$size-value-name} {
+            min-#{$size-name}: $size-value;
+        }
+    }
+}

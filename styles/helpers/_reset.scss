@@ -1,0 +1,291 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  max-height: 99999px;
+  
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: $color-default-white;
+  
+  line-height: 1.15;
+  
+  height: 100%;
+  
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  color: $color-body;
+  
+  font: 400 #{$site-font-size}/#{$site-line-height} $site-font;
+  
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+audio, canvas, progress, video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+audio:not([controls]) {
+  display: none;
+  
+  height: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+  font-style: normal;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1em;
+}
+
+img {
+  border: 0;
+  outline: none;
+}
+
+dfn {
+  font-style: italic;
+}
+
+mark {
+  background: $color-warning;
+  color: $color-default-black;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  vertical-align: baseline;
+  
+  font-size: 120%;
+  line-height: 0;
+  
+  position: relative;
+}
+
+sup {
+  top: .25em;
+  
+  &.label-sup {
+    @extend .fg-danger-error;
+  
+    top: 0;
+  }
+}
+
+sub {
+  bottom: -.05em;
+}
+
+q:before,
+q:after {
+  content: '';
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+iframe, abbr, acronym {
+  border: 0;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+
+pre {
+  overflow: auto;
+}
+
+figure {
+  margin: 1em 40px;
+}
+
+img {
+  border-style: none;
+}
+
+em, i {
+  font-style: italic;
+}
+
+b, strong, optgroup {
+  font-weight: 700;
+}
+
+fieldset {
+  border: 1px solid silver;
+  
+  padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+  border: 0;
+  color: inherit;
+  display: table;
+  white-space: normal;
+  max-width: 100%;
+}
+
+button, input, optgroup, select, textarea {
+  color: inherit;
+  
+  font: inherit;
+}
+
+button, input {
+  overflow: visible;
+}
+
+button, select {
+  text-transform: none;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+input, input:focus, button, textarea, a:focus {
+  border: 0;
+  outline: none;
+}
+
+input::-webkit-input-placeholder {
+  color: $neutral-primary;
+}
+
+input:-moz-placeholder {
+  color: $neutral-primary;
+}
+
+textarea::-webkit-input-placeholder {
+  color: $border-color;
+}
+
+textarea:-moz-placeholder {
+  color: $border-color;
+}
+
+input {
+  line-height: normal;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled], input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  outline: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+a {
+  color: $color-link;
+  cursor: pointer;
+  
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+caption, th {
+  text-align: left;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+[hidden], .--hidden, template {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+::selection {
+  background: $color-default-black;
+  color: $color-default-white;
+}

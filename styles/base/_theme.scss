@@ -1,0 +1,84 @@
+// File contains all of the styles for the background and foreground
+
+// Background
+.bg-for-test {
+  background-color: #BDE5D1;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bg-black {
+  background-color: $color-default-black;
+}
+
+.bg-white {
+  background-color: $color-default-white;
+}
+
+.bg-body {
+  background-color: $main-bg-color;
+}
+
+.bg-cb {
+  background-color: $color-body;
+}
+
+.bg-psc {
+  background-color: $primary-site-color;
+}
+
+.bg-psh {
+  background-color: $primary-site-hover;
+}
+
+.bg-ssc {
+  background-color: $secondary-site-color;
+}
+
+.bg-bc {
+  background-color: $border-color;
+}
+
+.bg-placeholder {
+  background-color: $neutral-placeholder;
+}
+
+// -------------------------------------------------
+// Foreground
+.fg-black {
+  color: $color-default-black;
+}
+
+.fg-white {
+  color: $color-default-white;
+}
+
+.fg-danger-error {
+  color: $color-danger-error;
+}
+
+.fg-success {
+  color: $color-success;
+}
+
+.fg-psc {
+  color: $primary-site-color;
+}
+
+.fg-psh {
+  color: $primary-site-hover;
+}
+
+.fg-ssc {
+  color: $secondary-site-color;
+}
+
+.fg-cb {
+  color: $color-body;
+}
+
+.fg-bc {
+  color: $border-color;
+}

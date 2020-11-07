@@ -1,0 +1,576 @@
+// Positioning
+
+@mixin pos-fit {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin pos-t {
+  top: 0;
+}
+
+@mixin pos-t-l {
+  top: 0;
+  left: 0;
+}
+
+@mixin pos-t-r {
+  top: 0;
+  right: 0;
+}
+
+@mixin pos-r {
+  right: 0;
+}
+
+@mixin pos-b {
+  bottom: 0;
+}
+
+@mixin pos-b-l {
+  bottom: 0;
+  left: 0;
+}
+
+@mixin pos-b-r {
+  bottom: 0;
+  right: 0;
+}
+
+@mixin pos-l {
+  left: 0;
+}
+
+@mixin pos-center {
+  transform: translateY(-50%) translateX(-50%);
+  top: 50%;
+  left: 50%;
+}
+
+@mixin pos-center-x {
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+@mixin pos-y {
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+//================================
+// z-index
+
+@mixin z-index($index, $prefix: '') {
+  .#{$prefix}z-index-#{$index} {
+    z-index: $index;
+  }
+}
+
+@mixin z-indexes($prefix: '') {
+  @for $i from $start-0 through $end-10 {
+    @include z-index($i, $prefix);
+  }
+}
+
+//================================
+// Flex
+
+@mixin flex-grow($val, $prefix: '') {
+  .#{$prefix}flex-#{$val} {
+    flex-grow: $val;
+  }
+}
+
+@mixin flex-shrink($val, $prefix: '') {
+  .#{$prefix}flex-shrink-#{$val} {
+    flex-shrink: $val;
+  }
+}
+
+@mixin flex-sizes-property($prefix: '') {
+  @for $i from $start-0 through $end-5 {
+    @include flex-grow($i, $prefix);
+    @include flex-shrink($i, $prefix);
+  }
+}
+
+// flex-direction: *;
+
+@mixin row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin col {
+  display: flex;
+  flex-direction: column;
+}
+
+// justify-content: *;
+
+@mixin jc-start {
+  justify-content: flex-start;
+}
+
+@mixin jc-center {
+  justify-content: center;
+}
+
+@mixin jc-end {
+  justify-content: flex-end;
+}
+
+@mixin jc-around {
+  justify-content: space-around;
+}
+
+@mixin jc-between {
+  justify-content: space-between;
+}
+
+// align-items: *;
+
+@mixin ai-start {
+  align-items: flex-start;
+}
+
+@mixin ai-center {
+  align-items: center;
+}
+
+@mixin ai-end {
+  align-items: flex-end;
+}
+
+@mixin ai-stretch {
+  align-items: stretch;
+}
+
+//================================
+// Sizes
+
+// -- Max Width
+@mixin make-a-grid-max-width($prefix: '') {
+  @for $i from $start-1 through $end-12 {
+    .#{$prefix}max-width-col-#{$i} {
+      max-width: px-to-rem(columnWidthFunction($i));
+      @extend .width-100p;
+    }
+  }
+}
+
+// -- Min Width
+@mixin make-a-grid-min-width($prefix: '') {
+  @for $i from $start-1 through $end-12 {
+    .#{$prefix}min-width-col-#{$i} {
+      min-width: px-to-rem(columnWidthFunction($i));
+    }
+  }
+}
+
+// Square And Circle
+@mixin square($val, $prefix: '') {
+  $size: number-to-string($val + '', '.', 'x');
+  
+  .#{$prefix}square-#{$size} {
+    flex: 0 0 #{$val}rem;
+    width: #{$val}rem;
+    height: #{$val}rem;
+  }
+}
+
+@mixin circle($val, $prefix: '') {
+  $size: number-to-string($val + '', '.', 'x');
+  
+  .#{$prefix}circle-#{$size} {
+    @extend .square-#{$size};
+    @extend .rounded-50p;
+  }
+}
+
+@mixin squares-and-circles($prefix: '') {
+  $val: $start-0;
+  
+  @while $val <= $end-5 {
+    @include square($val, $prefix);
+    @include circle($val, $prefix);
+    
+    $val: $val + $step-0x25;
+  }
+}
+
+//================================
+// Spacing
+
+@mixin margins($val, $prefix: '') {
+  $size: number-to-string($val + '', '.', 'x');
+  
+  .#{$prefix}margin-#{$size} {
+    margin: #{$val}rem;
+  }
+  .#{$prefix}margin-t-#{$size} {
+    margin-top: #{$val}rem;
+  }
+  .#{$prefix}margin-r-#{$size} {
+    margin-right: #{$val}rem;
+  }
+  .#{$prefix}margin-b-#{$size} {
+    margin-bottom: #{$val}rem;
+  }
+  .#{$prefix}margin-l-#{$size} {
+    margin-left: #{$val}rem;
+  }
+  .#{$prefix}margin-v-#{$size} {
+    margin-top: #{$val}rem;
+    margin-bottom: #{$val}rem;
+  }
+  .#{$prefix}margin-h-#{$size} {
+    margin-left: #{$val}rem;
+    margin-right: #{$val}rem;
+  }
+}
+
+@mixin paddings($val, $prefix: '') {
+  $size: number-to-string($val + '', '.', 'x');
+  
+  .#{$prefix}padding-#{$size} {
+    padding: #{$val}rem;
+  }
+  .#{$prefix}padding-t-#{$size} {
+    padding-top: #{$val}rem;
+  }
+  .#{$prefix}padding-r-#{$size} {
+    padding-right: #{$val}rem;
+  }
+  .#{$prefix}padding-b-#{$size} {
+    padding-bottom: #{$val}rem;
+  }
+  .#{$prefix}padding-l-#{$size} {
+    padding-left: #{$val}rem;
+  }
+  .#{$prefix}padding-v-#{$size} {
+    padding-top: #{$val}rem;
+    padding-bottom: #{$val}rem;
+  }
+  .#{$prefix}padding-h-#{$size} {
+    padding-left: #{$val}rem;
+    padding-right: #{$val}rem;
+  }
+}
+
+@mixin gaps-v($val, $prefix: '') {
+  $size: number-to-string($val + '', '.', 'x');
+  
+  .#{$prefix}gaps-v-#{$size} > :not(:last-child):not(:only-child) {
+    margin-bottom: #{$val}rem;
+  }
+}
+
+@mixin gaps-h($val, $prefix: '') {
+  $size: number-to-string($val + '', '.', 'x');
+  
+  .#{$prefix}gaps-h-#{$size} > :not(:last-child):not(:only-child) {
+    margin-right: #{$val}rem;
+  }
+}
+
+@mixin indentation($prefix: '') {
+  $val: $start-0;
+  
+  @while $val <= $end-10 {
+    @include margins($val, $prefix);
+    @include paddings($val, $prefix);
+    @include gaps-v($val, $prefix);
+    @include gaps-h($val, $prefix);
+    
+    $val: $val + $step-0x25;
+  }
+}
+
+//================================
+// Grid
+
+@mixin grid($items) {
+  $gutter-h: px-to-rem($gutter);
+  $gutter-v: px-to-rem($gutter);
+  
+  margin-bottom: - ($gutter-v);
+  
+  > * {
+    flex-basis: auto;
+    
+    width: grid-item-width($items, $gutter-h);
+  }
+  
+  &:not(.--no-margin-r) {
+    > * {
+      @if $items > 0 {
+        &:not(:nth-child(-n)):not(:last-child) {
+          margin-right: 0;
+        }
+        &:not(:nth-child(#{$items}n)):not(:last-child) {
+          margin-right: $gutter-h;
+        }
+      }
+    }
+  }
+  
+  &:not(.--no-margin-b){
+    > * {
+      @if $items > 0 {
+        margin-bottom: $gutter-v;
+      } @else if $items == 1 {
+        &:not(:last-child) {
+          margin-bottom: $gutter-v;
+        }
+      }
+    }
+  }
+  
+  &.--no-margin-r {
+    > * {
+      width: grid-item-width($items, 0);
+    }
+  }
+  
+  &.--no-margin-b {
+    > * {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@mixin make-a-grid($prefix: '') {
+  @for $i from 1 through $grid {
+    .#{$prefix}grid-#{$i} {
+      @include grid($i);
+    }
+  }
+}
+
+// Row - Columns
+
+@mixin row-offsets() {
+  margin-left: $row-offsets;
+  margin-right: $row-offsets;
+}
+
+@mixin col-offsets() {
+  padding-left: $col-offsets;
+  padding-right: $col-offsets;
+}
+
+@mixin no-col-offsets() {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@mixin width-col() {
+  min-height: 1px;
+  @include no-col-offsets;
+}
+
+@mixin make-a-grid-row-column($prefix: '') {
+  @for $i from 1 through $column {
+    $atom: 100% / $column;
+    $val: $atom * $i;
+    
+    @if $i == 2 {
+      .#{$prefix}width-col-#{$i} {
+        flex: 0 0 #{$val};
+        
+        max-width: #{$val};
+        width: #{$val};
+        
+        @include width-col;
+      }
+      .#{$prefix}width-col-20p {
+        flex: 0 0 20%;
+        
+        max-width: 20%;
+        width: 20%;
+        
+        @include width-col;
+      }
+    } @else {
+      .#{$prefix}width-col-#{$i} {
+        flex: 0 0 #{$val};
+        
+        max-width: #{$val};
+        width: #{$val};
+        
+        @include width-col;
+      }
+    }
+  }
+}
+
+//================================
+// HR
+
+@mixin hr-body() {
+  @extend .col-start-start;
+  
+  background-color: currentColor;
+  @extend .border-none;
+}
+
+@mixin hr-h($px: 1px) {
+  @include hr-body;
+  
+  @extend .width-100p;
+  height: $px;
+}
+
+@mixin hr-v($px: 1px) {
+  @include hr-body;
+  
+  align-self: stretch;
+  
+  min-width: $px;
+  width: $px;
+  height: auto;
+}
+
+//================================
+// Media Queries
+
+@mixin media-1920 {
+  @media (max-width: 1920px) {
+    @content
+  }
+}
+
+@mixin media-1660 {
+  @media (max-width: 1660px) {
+    @content
+  }
+}
+
+@mixin media-1440 {
+  @media (max-width: 1440px) {
+    @content
+  }
+}
+
+@mixin media-1360 {
+  @media (max-width: 1360px) {
+    @content
+  }
+}
+
+@mixin media-1280 {
+  @media (max-width: 1280px) {
+    @content
+  }
+}
+
+@mixin media-1024 {
+  @media (max-width: 1024px) {
+    @content
+  }
+}
+
+@mixin media-960 {
+  @media (max-width: 960px) {
+    @content
+  }
+}
+
+@mixin media-860 {
+  @media (max-width: 860px) {
+    @content
+  }
+}
+
+@mixin media-768 {
+  @media (max-width: 768px) {
+    @content
+  }
+}
+
+@mixin media-640 {
+  @media (max-width: 640px) {
+    @content
+  }
+}
+
+@mixin media-540 {
+  @media (max-width: 540px) {
+    @content
+  }
+}
+
+@mixin media-480 {
+  @media (max-width: 480px) {
+    @content
+  }
+}
+
+@mixin media-425 {
+  @media (max-width: 425px) {
+    @content
+  }
+}
+
+@mixin media-375 {
+  @media (max-width: 375px) {
+    @content
+  }
+}
+
+//================================
+// Effects
+
+@mixin hover {
+  &:hover {
+    @content
+  }
+}
+
+@mixin focus {
+  &:focus {
+    @content
+  }
+}
+
+@mixin not-disabled {
+  &:not(:disabled):not([disabled]) {
+    @content
+  }
+}
+
+@mixin disabled {
+  &:disabled, &[disabled] {
+    @content
+  }
+}
+
+@mixin active {
+  &:active {
+    @content
+  }
+}
+
+//================================
+// Typography
+
+@mixin responsive-font($default, $t-1024, $t-768, $m-480) {
+  font-size: px-to-rem($default);
+  
+  @include media-1024 {
+    font-size: px-to-rem($t-1024);
+  }
+  
+  @include media-768 {
+    font-size: px-to-rem($t-768);
+  }
+  
+  @include media-480 {
+    font-size: px-to-rem($m-480);
+  }
+}
+
+//================================

@@ -1,0 +1,9 @@
+@import 'helpers/variables';
+@import 'helpers/functions';
+@import 'helpers/reset';
+@import 'base/general';
+// // =================================
+@import 'base/theme';             // Styles for the background and foreground
+@import 'atoms/flex';
+@import 'atoms/size';
+@import 'atoms/indent';

@@ -11,7 +11,7 @@ module.exports = {
     devtool: 'cheap-source-map',
 
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss'],
     },
 
     entry: {
@@ -46,6 +46,14 @@ module.exports = {
                         test: /\.tsx?$/,
                         include: SRC_DIR,
                         use: 'ts-loader',
+                    },
+                    {
+                        test: /\.scss$/,
+                        use: [
+                            'style-loader',
+                            'css-loader',
+                            'sass-loader',
+                        ],
                     },
                 ],
             },

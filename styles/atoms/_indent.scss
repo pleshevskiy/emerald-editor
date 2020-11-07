@@ -1,0 +1,19 @@
+
+$indent-map: (
+    'padding': (4px, 8px, 16px),
+    'margin': (4px, 8px, 16px),
+);
+
+@each $indent-name, $indent-values in $indent-map {
+    $indent-short-name: str-slice($indent-name, 1, 1);
+
+    @each $indent-value in $indent-values {
+        $indent-value-name: name-from-value($indent-value);
+
+        @debug ".#{$indent-short-name}-#{$indent-value-name}";
+
+        .#{$indent-short-name}-#{$indent-value-name} {
+            #{$indent-name}: $indent-value;
+        }
+    }
+}
