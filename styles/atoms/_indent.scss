@@ -4,14 +4,24 @@ $indent-map: (
     'margin': (4px, 8px, 16px),
 );
 
+$indent-direction-props: 'top', 'right', 'left', 'bottom';
+
 @each $indent-name, $indent-values in $indent-map {
-    $indent-short-name: str-slice($indent-name, 1, 1);
+    $indent-short-name: first-char($indent-name);
 
     @each $indent-value in $indent-values {
         $indent-value-name: name-from-value($indent-value);
 
         .#{$indent-short-name}-#{$indent-value-name} {
             #{$indent-name}: $indent-value;
+        }
+
+        @each $indent-dir-name in $indent-direction-props {
+            $indent-dir-short-name: first-char($indent-dir-name);
+
+            .#{$indent-short-name}-#{$indent-dir-short-name}-#{$indent-value-name} {
+                #{$indent-name}-#{$indent-dir-name}: $indent-value;
+            }
         }
     }
 }

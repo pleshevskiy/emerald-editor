@@ -4,7 +4,7 @@ $size-map: (
 );
 
 @each $size-name, $size-values in $size-map {
-    $size-short-name: str-slice($size-name, 1, 1);
+    $size-short-name: first-char($size-name);
 
     @each $size-value in $size-values {
         $size-value-name: name-from-value($size-value);

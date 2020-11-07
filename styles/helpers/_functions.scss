@@ -1,3 +1,7 @@
+@function first-char($string) {
+    @return str-slice($string, 1, 1);
+}
+
 @function ends-with($string, $find) {
     @return str-index($string, $find) == (str-length($string) - str-length($find) + 1);
 }
