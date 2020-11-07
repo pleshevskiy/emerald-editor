@@ -10,8 +10,6 @@ $indent-map: (
     @each $indent-value in $indent-values {
         $indent-value-name: name-from-value($indent-value);
 
-        @debug ".#{$indent-short-name}-#{$indent-value-name}";
-
         .#{$indent-short-name}-#{$indent-value-name} {
             #{$indent-name}: $indent-value;
         }
