@@ -33,13 +33,13 @@ $flex-align-items-map: (
 
 @each $jc-name, $jc-value in $flex-justify-content-map {
     .jc-#{$jc-name} {
-        justify-content: $jc-value;
+        justify-content: unquote($jc-value);
     }
 }
 
 @each $ai-name, $ai-value in $flex-align-items-map {
     .ai-#{$ai-name} {
-        align-items: $ai-value;
+        align-items: unquote($ai-value);
     }
 }
 
