@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -27,7 +28,7 @@ module.exports = {
 
     devServer: {
         contentBase: OUT_DIR,
-        open: true,
+        open: process.env.AUTO_OPEN_DEV_SERVER_ENABLED === 'true',
     },
 
     module: {

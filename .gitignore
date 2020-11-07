@@ -18,5 +18,9 @@ coverage
 # Dependency directories
 node_modules/
 
+# Environments
+.env*
+!.env.sample
+
 # Build destination
 target/
