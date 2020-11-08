@@ -1,0 +1,7 @@
+$position-props: absolute, relative;
+
+@each $pos in $position-props {
+    .#{$pos} {
+        position: $pos;
+    }
+}

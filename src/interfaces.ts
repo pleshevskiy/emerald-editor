@@ -1,5 +1,6 @@
 import { ComponentType } from './component';
 
-export interface DragItem {
+export type DragItem = Readonly<{
   type: keyof typeof ComponentType;
-}
+  index?: number;
+}>
