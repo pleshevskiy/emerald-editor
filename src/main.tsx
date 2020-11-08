@@ -2,6 +2,7 @@ import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { EditorContainer } from './editor-container';
+import { Component, ComponentType } from './component';
 
 export function EmeraldEditor() {
     return (
@@ -12,7 +13,10 @@ export function EmeraldEditor() {
                         <EditorContainer />
                     </div>
                 </div>
-                <div className="col-start-start w-320 p-16 bg-for-test">3</div>
+                <div className="col-start-start w-320 p-16">
+                    <h3>Components</h3>
+                    <Component type={ComponentType.Layout} />
+                </div>
             </div>
         </DndProvider>
     );
