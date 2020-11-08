@@ -1,5 +1,6 @@
 import React from 'react';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
+import { DragItem } from './interfaces';
 
 export enum ComponentType {
     Layout = 'Layout',
@@ -8,11 +9,15 @@ export enum ComponentType {
 
 type ComponentProps = {
     type: ComponentType | keyof typeof ComponentType;
+    item?: DragItem;
 };
 
-export function Component({ type }: ComponentProps) {
+export function Component({ type, item }: ComponentProps) {
     const [{ isDragging }, drag] = useDrag({
-        item: { type },
+        item: {
+            ...item,
+            type,
+        },
         collect: (monitor: DragSourceMonitor) => ({
             isDragging: monitor.isDragging(),
         }),
@@ -24,7 +29,7 @@ export function Component({ type }: ComponentProps) {
             className="row-center-center h-100 w-100p m-t-8 bg-for-test"
             style={isDragging ? {background: 'red'} : {}}
         >
-            {type} Component
+            {type} Component {item?.index ?? ''}
         </div>
     );
 }
