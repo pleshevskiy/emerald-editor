@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useDrop } from 'react-dnd';
 import { Component, ComponentType } from './component';
 import { DragItem } from './interfaces';
@@ -6,7 +6,7 @@ import { Trash } from './trash';
 
 
 export function EditorContainer() {
-    const [components, setComponents] = useState<Required<DragItem>[]>([]);
+    const [components, setComponents] = React.useState<Required<DragItem>[]>([]);
 
     const [{ didDrop }, drop] = useDrop({
         accept: [
@@ -28,7 +28,7 @@ export function EditorContainer() {
         }),
     });
 
-    const onDropToTrash = useCallback(
+    const onDropToTrash = React.useCallback(
         (item) => {
             if (item.index != null) {
                 setComponents([
