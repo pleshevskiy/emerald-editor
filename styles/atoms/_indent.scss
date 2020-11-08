@@ -23,5 +23,15 @@ $indent-direction-props: 'top', 'right', 'left', 'bottom';
                 #{$indent-name}-#{$indent-dir-name}: $indent-value;
             }
         }
+
+        .#{$indent-short-name}-h-#{$indent-value-name} {
+            @extend .#{$indent-short-name}-l-#{$indent-value-name};
+            @extend .#{$indent-short-name}-r-#{$indent-value-name};
+        }
+
+        .#{$indent-short-name}-v-#{$indent-value-name} {
+            @extend .#{$indent-short-name}-t-#{$indent-value-name};
+            @extend .#{$indent-short-name}-b-#{$indent-value-name};
+        }
     }
 }
