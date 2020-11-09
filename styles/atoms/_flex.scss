@@ -1,64 +1,65 @@
+// VALUES
 
-$flex-direction-props: 'row', 'col';
+$flex-direction-props: row, column;
 
 $flex-justify-content-map: (
-    'start': 'flex-start',
-    'end': 'flex-end',
-    'center': 'center',
-    'around': 'space-around',
-    'between': 'space-between',
+    'start': flex-start,
+    'end': flex-end,
+    'center': center,
+    'around': space-around,
+    'between': space-between,
 );
 
 $flex-align-items-map: (
-    'start': 'flex-start',
-    'end': 'flex-end',
-    'center': 'center',
-    'stretch': 'stretch',
+    'start': flex-start,
+    'end': flex-end,
+    'center': center,
+    'stretch': stretch,
 );
+
+$flex-grow-values: 1;
+
+/// IMPLEMENTATION
 
 .flex {
     display: flex;
 }
 
-.row {
-    @extend .flex;
-    flex-direction: row;
-}
+@each $dir in $flex-direction-props {
+    $dir-short-name: str-slice($dir, 1, 3);
 
-.col {
-    @extend .flex;
-    flex-direction: column;
+    .#{$dir-short-name} {
+        @extend .flex;
+        flex-direction: $dir;
+    }
 }
-
 
 @each $jc-name, $jc-value in $flex-justify-content-map {
     .jc-#{$jc-name} {
-        justify-content: unquote($jc-value);
+        justify-content: $jc-value;
     }
 }
 
 @each $ai-name, $ai-value in $flex-align-items-map {
     .ai-#{$ai-name} {
-        align-items: unquote($ai-value);
+        align-items: $ai-value;
     }
 }
 
 @each $dir-name in $flex-direction-props {
-  @each $jc-name, $_ in $flex-justify-content-map {
-    @each $ai-name, $_ in $flex-align-items-map {
-      .#{$dir-name}-#{$jc-name}-#{$ai-name} {
-        @extend .#{$dir-name};
-        @extend .jc-#{$jc-name};
-        @extend .ai-#{$ai-name};
-      }
+    @each $jc-name, $_ in $flex-justify-content-map {
+        @each $ai-name, $_ in $flex-align-items-map {
+            .#{$dir-name}-#{$jc-name}-#{$ai-name} {
+                @extend .#{$dir-name};
+                @extend .jc-#{$jc-name};
+                @extend .ai-#{$ai-name};
+            }
+        }
     }
-  }
 }
 
-$flex-grow-values: 1;
-
 @each $grow in $flex-grow-values {
-  .grow-#{$grow} {
-    flex-grow: $grow;
-  }
+    .grow-#{$grow} {
+        flex-grow: $grow;
+    }
 }

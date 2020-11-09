@@ -1,4 +1,8 @@
+// VALUES
+
 $position-props: absolute, relative;
+
+// IMPLEMENTATION
 
 @each $pos in $position-props {
     .#{$pos} {

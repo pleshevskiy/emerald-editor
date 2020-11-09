@@ -1,7 +1,11 @@
+// VALUES
+
 $size-map: (
     'width': (100vw, 100%, 320px),
     'height': (100vh, 100%, 100px),
 );
+
+// IMPLEMENTATION
 
 @each $size-name, $size-values in $size-map {
     $size-short-name: first-char($size-name);

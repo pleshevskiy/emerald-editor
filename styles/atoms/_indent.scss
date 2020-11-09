@@ -1,3 +1,4 @@
+// VALUES
 
 $indent-map: (
     'padding': (4px, 8px, 16px),
@@ -5,6 +6,8 @@ $indent-map: (
 );
 
 $indent-direction-props: 'top', 'right', 'left', 'bottom';
+
+// IMPLEMENTATION
 
 @each $indent-name, $indent-values in $indent-map {
     $indent-short-name: first-char($indent-name);
