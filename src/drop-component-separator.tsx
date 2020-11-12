@@ -3,9 +3,6 @@ import { useDrop } from 'react-dnd';
 import { Component, ComponentType } from './component';
 import { DragItem } from './interfaces';
 
-const separatorStyles: React.CSSProperties = {
-};
-
 type DropComponentSeparatorProps = {
     index: number;
     onDrop: (item: DragItem, index: number) => unknown; 
@@ -28,29 +25,29 @@ export function DropComponentSeparator({ onDrop, index }: DropComponentSeparator
         }),
     });
 
-    const opacity = isOver ? 1 : 0.6;
     const canDrop = React.useMemo(
         () => {
             const itemIndex = draggingItem?.index;
-            return isOver
-                && draggingItem
+            return draggingItem
                 && (itemIndex == null || ![itemIndex, itemIndex + 1].includes(index));
         },
-        [draggingItem, isOver, index]
+        [draggingItem, index]
     );
+
+    const opacity = isOver ? 1 : 0.6;
 
     return (
         <>
-            {draggingItem ? (
+            {canDrop ? (
                 <div
                     ref={drop}
                     className='row-center-center w-100p h-32 bg-for-test'
-                    style={{...separatorStyles, opacity}}
+                    style={{ opacity }}
                 >
                     <span>Drop here {index}</span>
                 </div>
             ) : null}
-            {draggingItem && canDrop ? (
+            {draggingItem && isOver && canDrop ? (
                 <Component
                     type={draggingItem.type}
                     item={draggingItem}
