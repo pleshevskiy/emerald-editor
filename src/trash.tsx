@@ -7,6 +7,7 @@ const trashStyles: React.CSSProperties = {
     top: '16px',
     right: '16px',
     border: '1px solid #000',
+    zIndex: 9999,
 };
 
 type TrashProps = {

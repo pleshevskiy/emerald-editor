@@ -26,10 +26,10 @@ export function Component({ type, item }: ComponentProps) {
     return (
         <div
             ref={drag}
-            className="row-center-center h-100 w-100p m-t-8 bg-for-test"
-            style={isDragging ? {background: 'red'} : {}}
+            className="row-center-center h-100 w-100p bg-for-test"
+            style={isDragging && item?.index != null ? { opacity: 0.5 } : {}}
         >
-            {type} Component {item?.index ?? ''}
+            {type} Component {item?.id ?? ''} {item?.index ?? ''}
         </div>
     );
 }
