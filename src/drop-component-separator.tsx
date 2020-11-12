@@ -9,18 +9,17 @@ type DropComponentSeparatorProps = {
 }
 
 export function DropComponentSeparator({ onDrop, index }: DropComponentSeparatorProps) {
-    const [{ isOver, didDrop, draggingItem }, drop] = useDrop({
+    const [{ isOver, draggingItem }, drop] = useDrop({
         accept: [
             ComponentType.Layout,
         ],
-        drop(item: DragItem) {
-            if (!didDrop) {
+        drop(item: DragItem, monitor) {
+            if (!monitor.didDrop) {
                 onDrop(item, index);
             }
         },
         collect: (monitor) => ({
             isOver: monitor.isOver(),
-            didDrop: monitor.didDrop(),
             draggingItem: monitor.getItem() as DragItem | undefined,
         }),
     });
