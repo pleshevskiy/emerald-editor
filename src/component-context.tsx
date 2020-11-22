@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import invariant from 'tiny-invariant';
 import { ComponentSource } from './interfaces';
 
@@ -34,7 +34,7 @@ export function ComponentProvider({ children, components }: ComponentProviderPro
 }
 
 export function useComponentContext() {
-    const context = useContext(ComponentContext);
+    const context = React.useContext(ComponentContext);
     invariant(context, 'Your component must be a child of <ComponentProvider />');
     return context;
 }

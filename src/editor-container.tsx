@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from './component';
 import { DropComponentSeparator } from './drop-component-separator';
+import { useEditorContext } from './editor-context';
 import { DragItem } from './interfaces';
 import { Trash } from './trash';
 
@@ -15,7 +16,7 @@ function shiftComponentIndex(diff = 1) {
 }
 
 export function EditorContainer() {
-    const [components, setComponents] = React.useState<Required<DragItem>[]>([]);
+    const { components, setComponents } = useEditorContext();
 
     const onDropToTrash = React.useCallback(
         (item) => {
@@ -26,7 +27,7 @@ export function EditorContainer() {
                 ]);
             }
         },
-        [components]
+        [components, setComponents]
     );
 
     const onDropComponent = React.useCallback(
@@ -49,7 +50,7 @@ export function EditorContainer() {
 
             setComponents(newComponents);
         },
-        [components]
+        [components, setComponents]
     );
 
     return (

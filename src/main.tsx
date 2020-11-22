@@ -5,20 +5,24 @@ import { Component } from './component';
 import { components } from './components';
 import { ComponentProvider, useComponentContext } from './component-context';
 import { EditorContainer } from './editor-container';
+import { EditorProvider } from './editor-context';
+
 
 export function EmeraldEditor() {
     return (
         <DndProvider backend={HTML5Backend}>
-            <ComponentProvider components={components}>
-                <div className="row-start-stretch grow-1">
-                    <div className="overflow-y-scroll col-start-center grow-1 h-100vh bg-black">
-                        <div className="col-start-center w-100p p-16">
-                            <EditorContainer />
+            <EditorProvider>
+                <ComponentProvider components={components}>
+                    <div className="row-start-stretch grow-1">
+                        <div className="overflow-y-scroll col-start-center grow-1 h-100vh bg-black">
+                            <div className="col-start-center w-100p p-16">
+                                <EditorContainer />
+                            </div>
                         </div>
+                        <Sidebar />
                     </div>
-                    <Sidebar />
-                </div>
-            </ComponentProvider>
+                </ComponentProvider>
+            </EditorProvider>
         </DndProvider>
     );
 }
