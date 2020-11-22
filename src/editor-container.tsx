@@ -1,6 +1,5 @@
 import React from 'react';
 import { Component } from './component';
-import { useComponentContext } from './component-context';
 import { DropComponentSeparator } from './drop-component-separator';
 import { DragItem } from './interfaces';
 import { Trash } from './trash';

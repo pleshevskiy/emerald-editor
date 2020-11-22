@@ -13,10 +13,8 @@ export function DropComponentSeparator({ onDrop, index }: DropComponentSeparator
         accept: [
             ComponentType.Layout,
         ],
-        drop(item: DragItem, monitor) {
-            if (!monitor.didDrop) {
-                onDrop(item, index);
-            }
+        drop(item: DragItem) {
+            onDrop(item, index);
         },
         collect: (monitor) => ({
             isOver: monitor.isOver(),
