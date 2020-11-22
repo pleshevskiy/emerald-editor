@@ -1,10 +1,10 @@
 import React from 'react';
 import invariant from 'tiny-invariant';
-import { DragItem } from './interfaces';
+import { ContainerDragItem } from './interfaces';
 
 export type EditorContextData = {
-    components: Required<DragItem>[];
-    setComponents: React.Dispatch<React.SetStateAction<Required<DragItem>[]>>;
+    components: ContainerDragItem[];
+    setComponents: React.Dispatch<React.SetStateAction<ContainerDragItem[]>>;
     chosenComponentIndex: number | null;
     setChosenComponentIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
@@ -14,7 +14,7 @@ export const EditorContext = React.createContext<EditorContextData | null>(null)
 export type EditorProviderProps = React.PropsWithChildren<Record<string, unknown>>;
 
 export function EditorProvider({ children }: EditorProviderProps) {
-    const [components, setComponents] = React.useState<Required<DragItem>[]>([]);
+    const [components, setComponents] = React.useState<ContainerDragItem[]>([]);
     const [chosenComponentIndex, setChosenComponentIndex] = React.useState<number | null>(null);
 
     const value = {

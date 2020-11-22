@@ -1,13 +1,13 @@
 import React from 'react';
-import { Component } from './component';
+import { Component, ComponentType } from './component';
 import { DropComponentSeparator } from './drop-component-separator';
 import { useEditorContext } from './editor-context';
-import { DragItem } from './interfaces';
+import { ContainerDragItem, DragItem } from './interfaces';
 import { Trash } from './trash';
 
 
 function shiftComponentIndex(diff = 1) {
-    return function (component: Required<DragItem>) {
+    return function (component: ContainerDragItem) {
         return {
             ...component,
             index: component.index + diff,
@@ -59,6 +59,7 @@ export function EditorContainer() {
         >
             <Trash onDrop={onDropToTrash} />
             <DropComponentSeparator
+                accept={[ComponentType.Layout]}
                 index={0}
                 onDrop={onDropComponent}
             />
@@ -67,6 +68,7 @@ export function EditorContainer() {
                 <React.Fragment key={i}>
                     <Component componentId={item.componentId} item={item}/>
                     <DropComponentSeparator
+                        accept={[ComponentType.Layout]}
                         index={i + 1}
                         onDrop={onDropComponent}
                     />

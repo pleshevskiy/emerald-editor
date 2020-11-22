@@ -2,7 +2,7 @@ import React from 'react';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { useComponent } from './component-context';
 import { useEditorContext } from './editor-context';
-import { DragItem } from './interfaces';
+import { ContainerDragItem, DragItem } from './interfaces';
 
 export enum ComponentType {
     Layout = 'Layout',
@@ -16,7 +16,8 @@ export type ComponentProps = {
 
 export function Component({ item, componentId }: ComponentProps) {
     const [source] = useComponent({ componentId });
-    const { setChosenComponentIndex } = useEditorContext();
+    const editorContext = useEditorContext();
+    const { components, setComponents, setChosenComponentIndex } = editorContext;
 
     const [collectedProps, drag] = useDrag({
         item: {
@@ -29,14 +30,29 @@ export function Component({ item, componentId }: ComponentProps) {
         }),
     });
 
+    const updateItem = React.useCallback(
+        (item: ContainerDragItem) => {
+            console.log(item);
+            setComponents([
+                ...components.slice(0, item.index),
+                item,
+                ...components.slice(item.index + 1),
+            ]);
+        },
+        [components, setComponents]
+    );
+
     const renderComponentData = {
-        item,
         componentParams: source.componentParams,
         collectedProps,
     };
 
-    const renderedItem = item ?
-        source.render(renderComponentData)
+    const renderedItem = item?.index != null ?
+        source.render({
+            ...renderComponentData,
+            item: item as ContainerDragItem,
+            updateItem,
+        })
         : source.renderPreview(renderComponentData);
 
     const onClick = React.useCallback(
