@@ -1,5 +1,6 @@
 import React from 'react';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
+import { useComponent } from './component-context';
 import { DragItem } from './interfaces';
 
 export enum ComponentType {
@@ -7,29 +8,34 @@ export enum ComponentType {
     Inner = 'Inner',
 }
 
-type ComponentProps = {
-    type: ComponentType | keyof typeof ComponentType;
+export type ComponentProps = {
     item?: DragItem;
+    componentId: string;
 };
 
-export function Component({ type, item }: ComponentProps) {
-    const [{ isDragging }, drag] = useDrag({
+export function Component({ item, componentId }: ComponentProps) {
+    const [source] = useComponent({ componentId });
+
+    const [collectedProps, drag] = useDrag({
         item: {
             ...item,
-            type,
+            componentId: source.id,
+            type: source.type,
         },
         collect: (monitor: DragSourceMonitor) => ({
             isDragging: monitor.isDragging(),
         }),
     });
 
-    return (
-        <div
-            ref={drag}
-            className="row-center-center h-100 w-100p bg-for-test"
-            style={isDragging && item?.index != null ? { opacity: 0.5 } : {}}
-        >
-            {type} Component {item?.id ?? ''} {item?.index ?? ''}
-        </div>
-    );
+    const renderComponentData = {
+        item,
+        componentParams: source.defaultParams,
+        collectedProps,
+    };
+
+    const renderedItem = item ?
+        source.render(renderComponentData)
+        : source.renderPreview(renderComponentData);
+
+    return renderedItem ? React.cloneElement(renderedItem, { ref: drag }) : null;
 }

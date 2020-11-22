@@ -48,7 +48,7 @@ export function DropComponentSeparator({ onDrop, index }: DropComponentSeparator
             ) : null}
             {draggingItem && isOver && canDrop ? (
                 <Component
-                    type={draggingItem.type}
+                    componentId={draggingItem.componentId}
                     item={draggingItem}
                 />
             ) : null}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from './component';
+import { useComponentContext } from './component-context';
 import { DropComponentSeparator } from './drop-component-separator';
 import { DragItem } from './interfaces';
 import { Trash } from './trash';
@@ -42,7 +43,6 @@ export function EditorContainer() {
                 ...componentsWithoutDraggedItem.slice(0, index),
                 {
                     ...item,
-                    id: item.id ?? Math.ceil(Math.random() * 100000),
                     index,
                 },
                 ...componentsWithoutDraggedItem.slice(index)
@@ -65,7 +65,7 @@ export function EditorContainer() {
 
             {components.map((item, i) => (
                 <React.Fragment key={i}>
-                    <Component type={item.type} item={item} />
+                    <Component componentId={item.componentId} item={item}/>
                     <DropComponentSeparator
                         index={i + 1}
                         onDrop={onDropComponent}
