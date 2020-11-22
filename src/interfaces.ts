@@ -14,7 +14,7 @@ export type RenderComponentProps<T> = {
 export type ComponentSource<T> = Readonly<{
     type: ComponentType;
     id: string;
-    defaultParams: T;
+    componentParams: T;
     render: React.FC<RenderComponentProps<T>>;
     renderPreview: React.FC<RenderComponentProps<T>>;
 }>

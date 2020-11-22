@@ -29,7 +29,7 @@ export function Component({ item, componentId }: ComponentProps) {
 
     const renderComponentData = {
         item,
-        componentParams: source.defaultParams,
+        componentParams: source.componentParams,
         collectedProps,
     };
 

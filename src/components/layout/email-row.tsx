@@ -9,7 +9,7 @@ export type EmailRowParams = {
 export const EmailRowSource: ComponentSource<EmailRowParams> = {
     type: ComponentType.Layout,
     id: 'email-row',
-    defaultParams: {
+    componentParams: {
         columns: 1,
     },
     renderPreview({ componentParams }) {
@@ -24,10 +24,9 @@ export const EmailRowSource: ComponentSource<EmailRowParams> = {
             </div>
         );
     },
-    render({ item, componentParams }) {
+    render({ componentParams }) {
         return (
             <div className='col-start-center w-100p p-4'>
-                <h3>Row {item?.index}</h3>
                 <div className="row-center-center w-100p p-4">
                     {Object.keys(new Array(componentParams.columns).fill(0)).map((column => (
                         <div key={column} className="grow-1 row-center-center">Column {column}</div>
@@ -38,10 +37,10 @@ export const EmailRowSource: ComponentSource<EmailRowParams> = {
     }
 };
 
-export function createCustomEmailRowSource(defaultParams: EmailRowParams): ComponentSource<EmailRowParams> {
+export function createCustomEmailRowSource(componentParams: EmailRowParams): ComponentSource<EmailRowParams> {
     return {
         ...EmailRowSource,
-        defaultParams,
-        id: EmailRowSource.id + '_' + Object.entries(defaultParams).map((pieces) => pieces.join('-')).join('_'),
+        componentParams,
+        id: EmailRowSource.id + '_' + Object.entries(componentParams).map((pieces) => pieces.join('-')).join('_'),
     };
 }
