@@ -1,6 +1,7 @@
 import React from 'react';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { useComponent } from './component-context';
+import { useEditorContext } from './editor-context';
 import { DragItem } from './interfaces';
 
 export enum ComponentType {
@@ -15,6 +16,7 @@ export type ComponentProps = {
 
 export function Component({ item, componentId }: ComponentProps) {
     const [source] = useComponent({ componentId });
+    const { setChosenComponentIndex } = useEditorContext();
 
     const [collectedProps, drag] = useDrag({
         item: {
@@ -37,5 +39,14 @@ export function Component({ item, componentId }: ComponentProps) {
         source.render(renderComponentData)
         : source.renderPreview(renderComponentData);
 
-    return renderedItem ? React.cloneElement(renderedItem, { ref: drag }) : null;
+    const onClick = React.useCallback(
+        () => {
+            return renderedItem && item?.index != null ?
+                setChosenComponentIndex(item.index)
+                : void 0;
+        },
+        [renderedItem, item, setChosenComponentIndex]
+    );
+
+    return renderedItem ? React.cloneElement(renderedItem, { ref: drag, onClick }) : null;
 }
