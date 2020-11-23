@@ -40,17 +40,23 @@ export const EmailRowSource: ComponentSource<EmailRowParams> = {
             <div className='col-start-start w-100p p-4'>
                 <div className="row-center-start w-100p p-4">
                     {Object.keys(new Array(componentParams.columns).fill(0)).map(((column, index) => {
-                        const innerItem = item.components?.[index];
+                        const innerItem = item.components?.find(component => component.index === index);
 
-                        return innerItem ? (
-                            <Component componentId={innerItem.componentId} item={innerItem} />
-                        ) : (
-                            <DropComponentSeparator
-                                accept={[ComponentType.Inner]}
+                        return (
+                            <div
                                 key={column}
-                                index={index}
-                                onDrop={onDropComponent}
-                            />
+                                className="grow-1"
+                            >
+                                {innerItem ? (
+                                    <Component componentId={innerItem.componentId} item={innerItem} />
+                                ) : (
+                                    <DropComponentSeparator
+                                        accept={[ComponentType.Inner]}
+                                        index={index}
+                                        onDrop={onDropComponent}
+                                    />
+                                )}
+                            </div>
                         );
                     }))}
                 </div>
