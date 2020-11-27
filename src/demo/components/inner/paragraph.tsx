@@ -1,6 +1,6 @@
 import React from 'react';
-import { ComponentType } from '../../component';
-import { ComponentSource, ParamType } from '../../interfaces';
+import { ComponentType } from '../../../component';
+import { ComponentSource, ParamType } from '../../../interfaces';
 
 export type ParagraphParams = {
     text: string;

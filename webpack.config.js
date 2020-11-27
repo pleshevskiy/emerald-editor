@@ -16,7 +16,7 @@ module.exports = {
     },
 
     entry: {
-        main: path.join(SRC_DIR, 'client.tsx'),
+        main: path.join(SRC_DIR, 'demo/client.tsx'),
     },
 
     output: {

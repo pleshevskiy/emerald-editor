@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { EmeraldEditor } from './main';
 
-import '../styles/main.scss';
+import '../../styles/main.scss';
 
 ReactDOM.render(
     <React.StrictMode>

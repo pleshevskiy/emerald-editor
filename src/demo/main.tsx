@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Component } from './component';
+import { Component } from '../component';
 import { components } from './components';
-import { ComponentProvider, useComponent, useComponentContext } from './component-context';
-import { EditorContainer } from './editor-container';
-import { EditorProvider, useEditorContext } from './editor-context';
+import { ComponentProvider, useComponent, useComponentContext } from '../component-context';
+import { EditorContainer } from '../editor-container';
+import { EditorProvider, useEditorContext } from '../editor-context';
 
 
 export function EmeraldEditor() {

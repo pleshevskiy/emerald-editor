@@ -1,7 +1,7 @@
 import React from 'react';
-import { Component, ComponentType } from '../../component';
-import { DropComponentSeparator } from '../../drop-component-separator';
-import { ComponentSource, ComponentSourceParam, DragItem, ParamType } from '../../interfaces';
+import { Component, ComponentType } from '../../../component';
+import { DropComponentSeparator } from '../../../drop-component-separator';
+import { ComponentSource, ComponentSourceParam, DragItem, ParamType } from '../../../interfaces';
 
 export type EmailRowParams = {
     columns: number;

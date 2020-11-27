@@ -1,6 +1,6 @@
 import { EmailRowSource, createCustomEmailRowSource } from './layout';
 import { ParagraphSource } from './inner';
-import { ParamType } from '../interfaces';
+import { ParamType } from '../../interfaces';
 
 export const components = [
     EmailRowSource,

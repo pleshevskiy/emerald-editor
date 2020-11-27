@@ -14,9 +14,11 @@
         "strict": true,
         "strictNullChecks": true,
         "allowSyntheticDefaultImports": true,
-        "declaration": true
+        "declaration": true,
+        "skipLibCheck": true
     },
     "include": [
-        "src",
+        "src/index.ts"
     ]
+
 }
