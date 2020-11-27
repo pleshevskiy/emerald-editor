@@ -3,7 +3,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Component } from './component';
 import { components } from './components';
-import { ComponentProvider, useComponentContext } from './component-context';
+import { ComponentProvider, useComponent, useComponentContext } from './component-context';
 import { EditorContainer } from './editor-container';
 import { EditorProvider, useEditorContext } from './editor-context';
 
@@ -39,15 +39,15 @@ const SIDEBAR_TABS = [
 ];
 
 export function Sidebar() {
-    const { chosenComponentIndex } = useEditorContext();
+    const { chosenComponent } = useEditorContext();
 
     const [tabContent, setTabContent] = React.useState(<ComponentsTabContent />);
 
     useEffect(() => {
-        if (chosenComponentIndex != null) {
+        if (chosenComponent != null) {
             setTabContent(SIDEBAR_TABS[1].tabContent);
         }
-    }, [chosenComponentIndex]);
+    }, [chosenComponent]);
 
     return (
         <div className="col-start-start w-320 p-16">
@@ -81,9 +81,36 @@ export function ComponentsTabContent() {
 }
 
 export function ParamsTabContent() {
-    return (
+    const { chosenComponent, patchComponent } = useEditorContext();
+    const [source] = useComponent({ componentId: chosenComponent?.componentId });
+
+    return chosenComponent && source ? (
+        <div className="col-start-start">
+            {Object.entries(source.componentParams)
+                .map(([key, config]) => (
+                    <div key={key}>
+                        <b>{key}</b>
+                        <input
+                            type="text"
+                            defaultValue={(chosenComponent.params?.[key] ?? config.defaultValue).toString()}
+                            onChange={(e) => {
+                                patchComponent(
+                                    chosenComponent,
+                                    {
+                                        params: {
+                                            ...chosenComponent?.params,
+                                            [key]: e.target.value,
+                                        }
+                                    }
+                                );
+                            }}
+                        />
+                    </div>
+                ))}
+        </div>
+    ) : (
         <div>
-            Here should be params of selected components.
+            Select component in the editor container
         </div>
     );
 }

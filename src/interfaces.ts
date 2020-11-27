@@ -1,6 +1,19 @@
 import React from 'react';
 import { ComponentType } from './component';
 
+export enum ParamType {
+    Text = 'text',
+    MultilineText = 'multiline-text',
+    Int = 'integer-number',
+}
+
+export type ComponentSourceParam<T> = {
+    [P in keyof T]: {
+        type: ParamType,
+        defaultValue: T[P],
+    }
+}
+
 export type ComponentDragCollectedProps = Readonly<{
     isDragging: boolean;
 }>
@@ -21,7 +34,7 @@ export type RenderComponentProps<T> = Readonly<
 export type ComponentSource<T> = Readonly<{
     type: ComponentType;
     id: string;
-    componentParams: T;
+    componentParams: ComponentSourceParam<T>;
     render: React.FC<RenderComponentProps<T>>;
     renderPreview: React.FC<RenderPreviewProps<T>>;
 }>
@@ -29,8 +42,10 @@ export type ComponentSource<T> = Readonly<{
 export type DragItem = Readonly<{
     type: keyof typeof ComponentType;
     componentId: string;
+    indexPath: number[];
     index?: number;
     components?: ContainerDragItem[];
+    params?: Record<string, string | number | boolean>;
 }>
 
 export type ContainerDragItem = DragItem & Required<Pick<DragItem, 'index'>>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentType } from '../../component';
-import { ComponentSource } from '../../interfaces';
+import { ComponentSource, ParamType } from '../../interfaces';
 
 export type ParagraphParams = {
     text: string;
@@ -10,7 +10,10 @@ export const ParagraphSource: ComponentSource<ParagraphParams> = {
     type: ComponentType.Inner,
     id: 'paragraph',
     componentParams: {
-        text: 'Input your text',
+        text: {
+            type: ParamType.Text,
+            defaultValue: 'Input your text',
+        }
     },
     renderPreview() {
         return (
@@ -19,9 +22,9 @@ export const ParagraphSource: ComponentSource<ParagraphParams> = {
             </div>
         );
     },
-    render({ componentParams }) {
+    render({ item, componentParams }) {
         return (
-            <p>{ componentParams.text }</p>
+            <p>{ componentParams.text } <span>[{item.indexPath.join(', ')}]</span> </p>
         );
     }
 };

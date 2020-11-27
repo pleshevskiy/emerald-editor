@@ -31,7 +31,7 @@ export function EditorContainer() {
     );
 
     const onDropComponent = React.useCallback(
-        (item: DragItem, index: number) => {
+        (item: DragItem, indexPath: number[], index: number) => {
             const componentsWithoutDraggedItem = item.index == null ?
                 components
                 : [
@@ -43,10 +43,15 @@ export function EditorContainer() {
                 ...componentsWithoutDraggedItem.slice(0, index),
                 {
                     ...item,
+                    indexPath: [...indexPath, index],
                     index,
                 },
                 ...componentsWithoutDraggedItem.slice(index)
-            ].map((item, index) => ({ ...item, index }));
+            ].map((item, index) => ({
+                ...item,
+                indexPath: [...indexPath, index],
+                index
+            }));
 
             setComponents(newComponents);
         },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component, ComponentType } from '../../component';
 import { DropComponentSeparator } from '../../drop-component-separator';
-import { ComponentSource, DragItem } from '../../interfaces';
+import { ComponentSource, ComponentSourceParam, DragItem, ParamType } from '../../interfaces';
 
 export type EmailRowParams = {
     columns: number;
@@ -11,7 +11,10 @@ export const EmailRowSource: ComponentSource<EmailRowParams> = {
     type: ComponentType.Layout,
     id: 'email-row',
     componentParams: {
-        columns: 1,
+        columns: {
+            type: ParamType.Int,
+            defaultValue: 1,
+        },
     },
     renderPreview({ componentParams }) {
         return (
@@ -26,12 +29,16 @@ export const EmailRowSource: ComponentSource<EmailRowParams> = {
         );
     },
     render({ item, componentParams, updateItem }) {
-        function onDropComponent(newItem: DragItem, index: number) {
+        function onDropComponent(newItem: DragItem, indexPath: number[], index: number) {
             updateItem({
                 ...item,
                 components: [
-                    ...(item?.components ?? []),
-                    { ...newItem, index }
+                    ...(item?.components?? []),
+                    {
+                        ...newItem,
+                        indexPath: [...indexPath, index],
+                        index,
+                    }
                 ]
             });
         }
@@ -47,11 +54,13 @@ export const EmailRowSource: ComponentSource<EmailRowParams> = {
                                 key={column}
                                 className="grow-1"
                             >
+                                <span>[{item.indexPath.join(', ')}]</span>
                                 {innerItem ? (
                                     <Component componentId={innerItem.componentId} item={innerItem} />
                                 ) : (
                                     <DropComponentSeparator
                                         accept={[ComponentType.Inner]}
+                                        item={item}
                                         index={index}
                                         onDrop={onDropComponent}
                                     />
@@ -65,7 +74,7 @@ export const EmailRowSource: ComponentSource<EmailRowParams> = {
     }
 };
 
-export function createCustomEmailRowSource(componentParams: EmailRowParams): ComponentSource<EmailRowParams> {
+export function createCustomEmailRowSource(componentParams: ComponentSourceParam<EmailRowParams>): ComponentSource<EmailRowParams> {
     return {
         ...EmailRowSource,
         componentParams,

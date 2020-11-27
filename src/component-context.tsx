@@ -40,16 +40,17 @@ export function useComponentContext() {
 }
 
 type UseComponentProps = Readonly<{
-    componentId: string;
+    componentId?: string;
 }>;
 
-export function useComponent<T = any>(
+export function useComponent<T = Record<string, string | number | boolean>>(
     { componentId }: UseComponentProps
-): [ComponentSource<T>] {
+): [ComponentSource<T> | undefined] {
     const componentContext = useComponentContext();
 
-    const source = componentContext.componentById.get(componentId);
-    invariant(source, 'You cannot use a not-existent component');
+    const source = componentId != null ?
+        componentContext.componentById.get(componentId)
+        : undefined;
 
     return [source];
 }

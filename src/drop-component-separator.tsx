@@ -1,19 +1,20 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import { Component, ComponentType } from './component';
-import { DragItem } from './interfaces';
+import { ContainerDragItem, DragItem } from './interfaces';
 
 type DropComponentSeparatorProps = {
-    accept: ComponentType[],
+    accept: ComponentType[];
+    item?: ContainerDragItem;
     index: number;
-    onDrop: (item: DragItem, index: number) => unknown; 
+    onDrop: (item: DragItem, indexPath: number[], index: number) => unknown;
 }
 
-export function DropComponentSeparator({ onDrop, index, accept }: DropComponentSeparatorProps) {
+export function DropComponentSeparator({ onDrop, item, index, accept }: DropComponentSeparatorProps) {
     const [{ canDrop, isOver, draggingItem }, drop] = useDrop({
         accept,
-        drop(item: DragItem) {
-            onDrop(item, index);
+        drop(newItem: DragItem) {
+            onDrop(newItem, item?.indexPath ?? [], index);
         },
         collect: (monitor) => ({
             canDrop: monitor.canDrop(),
