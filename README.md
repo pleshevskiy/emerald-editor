@@ -15,8 +15,19 @@ drag and drop. The editor should be able to change html structure, styles for
 each blocks. And also the editor should returns html and styles as result for
 integration with API. I didn't find it and decided to create it myself.
 
+## Installation
+
+```bash
+npm install emerald-editor-core --save-dev
+```
+
+## Usage
+
+See [demo].
+
 ## License
 
 Emerald editor is released under the [MIT License].
 
 [MIT License]: https://github.com/pleshevskiy/emerald-editor/blob/master/LICENSE
+[demo]: https://github.com/pleshevskiy/emerald-editor/tree/master/src/demo
