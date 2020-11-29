@@ -1,8 +1,12 @@
 import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import invariant from 'tiny-invariant';
-import { ContainerDragItem } from './interfaces';
+import { ComponentSource, ContainerDragItem } from './interfaces';
 
 export type EditorContextData = {
+    componentSources: ComponentSource<any>[];
+    componentSourceById: Map<string, ComponentSource<any>>;
     components: ContainerDragItem[];
     setComponents: React.Dispatch<React.SetStateAction<ContainerDragItem[]>>;
     chosenComponent: ContainerDragItem | undefined;
@@ -12,13 +16,20 @@ export type EditorContextData = {
 
 export const EditorContext = React.createContext<EditorContextData | null>(null);
 
-export type EditorProviderProps = React.PropsWithChildren<Record<string, unknown>>;
+export type EditorProviderProps = React.PropsWithChildren<{
+    componentSources: ComponentSource<any>[];
+}>;
 
-export function EditorProvider({ children }: EditorProviderProps) {
+export function EditorProvider({ children, componentSources: $$componentSources }: EditorProviderProps) {
+    const componentSourceById = new Map(
+        $$componentSources.map(source => [source.id, source])
+    );
+    const componentSources = Array.from(componentSourceById.values());
+
     const [components, setComponents] = React.useState<ContainerDragItem[]>([]);
     const [chosenComponent, setChosenComponent] = React.useState<ContainerDragItem | undefined>();
 
-    const $findComponentInfoByIndexPath = React.useCallback(
+    const $$findComponentInfoByIndexPath = React.useCallback(
         (indexPath?: number[] | null) => {
             const arrayIndexPath: number[] = [];
             let component: ContainerDragItem | undefined;
@@ -45,7 +56,7 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
     const patchComponent = React.useCallback(
         (item: ContainerDragItem, changes: Partial<ContainerDragItem>) => {
-            const info = $findComponentInfoByIndexPath(item.indexPath);
+            const info = $$findComponentInfoByIndexPath(item.indexPath);
             if (!info.component) {
                 return;
             }
@@ -74,10 +85,12 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
             setComponents(updatedComponents);
         },
-        [$findComponentInfoByIndexPath, components]
+        [$$findComponentInfoByIndexPath, components]
     );
 
     const value: EditorContextData = {
+        componentSources,
+        componentSourceById,
         components,
         setComponents,
         chosenComponent,
@@ -86,9 +99,11 @@ export function EditorProvider({ children }: EditorProviderProps) {
     };
 
     return (
-        <EditorContext.Provider value={value}>
-            {children}
-        </EditorContext.Provider>
+        <DndProvider backend={HTML5Backend}>
+            <EditorContext.Provider value={value}>
+                {children}
+            </EditorContext.Provider>
+        </DndProvider>
     );
 }
 
@@ -96,4 +111,20 @@ export function useEditorContext() {
     const context = React.useContext(EditorContext);
     invariant(context, 'Your component must be a child of <EditorProvider />');
     return context;
+}
+
+type UseComponentProps = Readonly<{
+    componentId?: string;
+}>;
+
+export function useComponentSource<T = Record<string, string | number | boolean>>(
+    { componentId }: UseComponentProps
+): [ComponentSource<T> | undefined] {
+    const editorContext = useEditorContext();
+
+    const source = componentId != null ?
+        editorContext.componentSourceById.get(componentId)
+        : undefined;
+
+    return [source];
 }

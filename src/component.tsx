@@ -1,8 +1,7 @@
 import React from 'react';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import invariant from 'tiny-invariant';
-import { useComponent } from './component-context';
-import { useEditorContext } from './editor-context';
+import { useComponentSource, useEditorContext } from './editor-context';
 import { ContainerDragItem, DragItem, RenderPreviewProps } from './interfaces';
 import { isContainerDragItem } from './misc';
 
@@ -17,7 +16,7 @@ export type ComponentProps = {
 };
 
 export function Component({ item, componentId }: ComponentProps) {
-    const [source] = useComponent({ componentId });
+    const [source] = useComponentSource({ componentId });
     invariant(source, 'You cannot use a not-existent component');
 
     const { components, setComponents, setChosenComponent } = useEditorContext();
